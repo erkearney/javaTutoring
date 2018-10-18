@@ -6,13 +6,27 @@ public class LinkedList {
         Node newNode = new Node(word);
         // Check if the list is empty
         if(head != null) {
-            current.setNext(newNode);
-            current = newNode;
+            // Just push the new node to the head
+            newNode.setNext(head);
+            head = newNode;
         } else {
             head = newNode;    
+            current = head;
         }
         return word;
     } 
+
+    public Node getCurrent() {
+        return this.current;
+    }
+
+    public void setCurrentToHead() {
+        this.current = this.head;
+    }
+
+    public void getNext() {
+        this.current = this.current.getNext();
+    }
 
     class Node {
         // Each word in the list is held in a Node object, which also holds

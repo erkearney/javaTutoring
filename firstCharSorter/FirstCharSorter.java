@@ -124,9 +124,18 @@ public class FirstCharSorter {
         // Write to outFile
         FileWriter fw = new FileWriter(outFile);
         BufferedWriter bw = new BufferedWriter(fw);
-        // Decide how to write out. . .
+        String writeLine;
         for(ArrayNode node : list) {
-            System.out.format("%c has %d unique words\n", node.getStartChar(), node.getCount());
+            writeLine = "There are " + node.getCount() + " word(s) that start with " + node.getStartChar() + ":\n";
+            bw.flush();
+            bw.write(writeLine);
+            node.getList().setCurrentToHead();
+            while(node.getList().getCurrent() != null) {
+                writeLine = node.getList().getCurrent().getWord() + ", " + node.getList().getCurrent().getCount() + "\n";
+                bw.flush();
+                bw.write(writeLine);
+                node.getList().getNext();
+            }
         }
     }
 }
